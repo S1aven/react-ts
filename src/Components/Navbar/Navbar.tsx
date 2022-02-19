@@ -3,9 +3,12 @@ import {NavLink} from 'react-router-dom';
 import s from './Navbar.module.css';
 
 export const Navbar = () => {
+
+  // const getActive = ({isActive}) => isActive ? s.active : s.item
+
   return (
     <nav className={s.navbar}>
-      <div className={s.item}>
+      <div className={s.item} >
         <NavLink className={({isActive}) => isActive ? s.active : s.item} to={"/profile"}>Profile</NavLink>
       </div>
       <div className={s.item}>

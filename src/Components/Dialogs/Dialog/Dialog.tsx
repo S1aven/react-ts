@@ -1,11 +1,9 @@
 import React from 'react';
 import s from './Dialog.module.css'
 import {NavLink} from "react-router-dom";
+import {DialogType} from "../../../redux/state";
 
-type DialogPropsType = {
-  name: string
-  id: number
-}
+type DialogPropsType = DialogType
 
 export const Dialog: React.FC<DialogPropsType> = (props) => {
   return (
