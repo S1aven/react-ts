@@ -1,3 +1,5 @@
+import {renderTree} from "./render";
+
 export type PostType  = {
   id: number
   post: string
@@ -51,4 +53,25 @@ export const state: RootStateType = {
   },
 
   sidebar: {}
+}
+
+export const addPostCallback = (postText: string) => {
+  const newPost:PostType = {
+    id: new Date().getTime(),
+    post: postText,
+    likeCount: 0
+  }
+  state.profilePage.posts.push(newPost)
+
+  renderTree(state)
+}
+
+export const addMessageCallback = (messageText: string) => {
+  const newMessage:MessageType = {
+    id: new Date().getTime(),
+    message: messageText
+  }
+  state.dialogsPage.messages.push(newMessage)
+
+  renderTree(state)
 }
