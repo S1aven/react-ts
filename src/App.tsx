@@ -11,6 +11,8 @@ type AppPropsType = {
   state: RootStateType
   addPostCallback: (postText: string) => void
   addMessageCallback: (messageText: string) => void
+  addNewPostTextCallback: (newPostText: string) => void
+  addNewMessageTextCallback: (newMessageText: string) => void
 }
 
 export const App = (props: AppPropsType) => {
@@ -24,11 +26,14 @@ export const App = (props: AppPropsType) => {
             <Route path={'/profile/*'} element={<Profile
               profilePage={props.state.profilePage}
               addPostCallback={props.addPostCallback}
+              addNewPostTextCallback={props.addNewPostTextCallback}
             />}/>
             <Route path={'/dialogs/*'} element={<Dialogs
+              newMessageText={props.state.dialogsPage.newMessageText}
               dialogs={props.state.dialogsPage.dialogs}
               messages={props.state.dialogsPage.messages}
               addMessageCallback={props.addMessageCallback}
+              addNewMessageTextCallback={props.addNewMessageTextCallback}
             />}/>
           </Routes>
         </div>
