@@ -13,10 +13,11 @@ const renderEntireTree = () => {
     <React.StrictMode>
       <App
         state={state}
-        addPostCallback={Store.addPostCallback.bind(Store)}
-        addMessageCallback={Store.addMessageCallback.bind(Store)}
-        addNewPostTextCallback={Store.addNewPostTextCallback.bind(Store)}
-        addNewMessageTextCallback={Store.addNewMessageTextCallback.bind(Store)}
+        dispatch={Store.dispatch.bind(Store)}
+        // addPostCallback={Store.addPostCallback.bind(Store)}
+        // addMessageCallback={Store.addMessageCallback.bind(Store)}
+        // addNewPostTextCallback={Store.addNewPostTextCallback.bind(Store)}
+        // addNewMessageTextCallback={Store.addNewMessageTextCallback.bind(Store)}
       />
     </React.StrictMode>,
     document.getElementById('root')
