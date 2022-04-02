@@ -2,7 +2,13 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
-import {ActionsTypes, addMessageAC, addNewMessageTextAC, DialogsPageType} from "../../redux/state";
+import {
+  // ActionsTypes,
+  // addMessageAC,
+  // addNewMessageTextAC,
+  DialogsPageType
+} from "../../redux/state";
+import {ActionsTypes, addMessageAC, addNewMessageTextAC} from "../../redux/action";
 
 type DialogsPropsType = DialogsPageType & {
   // addMessageCallback: (messageText: string) => void
