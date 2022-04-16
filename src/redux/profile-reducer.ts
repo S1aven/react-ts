@@ -1,15 +1,26 @@
-import {
-  // ACTIONS_TYPE,
-  // ActionsTypes,
-  PostType,
-  ProfilePageType
-} from "./state";
+// import {PostType, ProfilePageType} from "./store";
 import {v1} from "uuid";
 import {ACTIONS_TYPE, ActionsTypes} from "./action";
 
+export type PostType = {
+  id: string
+  post: string
+  likeCount: number
+}
+export type ProfilePageType = {
+  posts: PostType[]
+  newPostText: string
+}
 
+const initialState: ProfilePageType = {
+  newPostText: '',
+  posts: [
+    {id: v1(), post: 'Hi, how are you?', likeCount: 15},
+    {id: v1(), post: "It's my first post", likeCount: 43},
+  ]
+}
 
-export const profileReducer = (state: ProfilePageType, action: ActionsTypes) => {
+export const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
   switch (action.type) {
 
     case ACTIONS_TYPE.ADD_POST_CALLBACK:
