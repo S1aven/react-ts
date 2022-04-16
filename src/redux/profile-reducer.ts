@@ -1,4 +1,3 @@
-// import {PostType, ProfilePageType} from "./store";
 import {v1} from "uuid";
 import {ACTIONS_TYPE, ActionsTypes} from "./action";
 
@@ -20,7 +19,7 @@ const initialState: ProfilePageType = {
   ]
 }
 
-export const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
   switch (action.type) {
 
     case ACTIONS_TYPE.ADD_POST_CALLBACK:

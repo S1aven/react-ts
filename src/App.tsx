@@ -3,15 +3,12 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-// import {RootStateType} from "./redux/store";
-import {ActionsTypes} from "./redux/action";
-import {AppRootState} from "./redux/redux-store";
+import {ReduxStoreType} from "./redux/redux-store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
-  state: AppRootState
-  dispatch: (action: ActionsTypes) => void
+  store: ReduxStoreType
 }
 
 export const App = (props: AppPropsType) => {
@@ -23,14 +20,10 @@ export const App = (props: AppPropsType) => {
         <div className={'app-wrapper-content'}>
           <Routes>
             <Route path={'/profile/*'} element={<Profile
-              profilePage={props.state.profilePage}
-              dispatch={props.dispatch}
+              store={props.store}
             />}/>
-            <Route path={'/dialogs/*'} element={<Dialogs
-              newMessageText={props.state.dialogsPage.newMessageText}
-              dialogs={props.state.dialogsPage.dialogs}
-              messages={props.state.dialogsPage.messages}
-              dispatch={props.dispatch}
+            <Route path={'/dialogs/*'} element={<DialogsContainer
+              store={props.store}
             />}/>
           </Routes>
         </div>

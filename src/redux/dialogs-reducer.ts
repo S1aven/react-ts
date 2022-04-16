@@ -1,4 +1,3 @@
-// import {DialogsPageType, MessageType} from "./store";
 import {v1} from "uuid";
 import {ACTIONS_TYPE, ActionsTypes} from "./action";
 
@@ -33,7 +32,7 @@ const initialState: DialogsPageType = {
   ]
 }
 
-export const dialogsReducer = (state = initialState, action: ActionsTypes): DialogsPageType => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes): DialogsPageType => {
   switch (action.type) {
 
     case ACTIONS_TYPE.ADD_MESSAGE_CALLBACK:
