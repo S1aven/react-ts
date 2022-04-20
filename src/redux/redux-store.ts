@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
   dialogsPage: dialogsReducer,
 });
 
-export type ReduxStoreType = typeof store
+export type ReduxStoreType = typeof store;
 export const store = createStore(rootReducer);
 
 // @ts-ignore

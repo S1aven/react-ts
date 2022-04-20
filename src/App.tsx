@@ -7,11 +7,11 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {ReduxStoreType} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
-type AppPropsType = {
-  store: ReduxStoreType
-}
+// type AppPropsType = {
+//   store: ReduxStoreType
+// }
 
-export const App = (props: AppPropsType) => {
+export const App = () => {
   return (
     <BrowserRouter>
       <div className={'app-wrapper'}>
@@ -20,10 +20,10 @@ export const App = (props: AppPropsType) => {
         <div className={'app-wrapper-content'}>
           <Routes>
             <Route path={'/profile/*'} element={<Profile
-              store={props.store}
+              // store={props.store}
             />}/>
             <Route path={'/dialogs/*'} element={<DialogsContainer
-              store={props.store}
+              // store={props.store}
             />}/>
           </Routes>
         </div>
