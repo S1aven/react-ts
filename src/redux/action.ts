@@ -5,12 +5,12 @@ export enum ACTIONS_TYPE {
   ADD_NEW_MESSAGE_TEXT_CALLBACK = 'DialogsPageExchange/ADD_NEW_MESSAGE_TEXT_CALLBACK',
 }
 
-export const addPostAC = (post: string) => {
+export const addPostAC = () => {
   return {
     type: ACTIONS_TYPE.ADD_POST_CALLBACK,
-    payload: {
-      post
-    }
+    // payload: {
+    //   post
+    // }
     // postText: postText
   } as const
 }
@@ -25,12 +25,12 @@ export const addNewPostTextAC = (newPostText: string) => {
   } as const
 }
 
-export const addMessageAC = (message: string) => {
+export const addMessageAC = () => {
   return {
     type: ACTIONS_TYPE.ADD_MESSAGE_CALLBACK,
-    payload: {
-      message
-    },
+    // payload: {
+    //   message
+    // },
     // messageText: messageText
   } as const
 }

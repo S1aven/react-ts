@@ -1,45 +1,73 @@
 import React from 'react';
 import {addMessageAC, addNewMessageTextAC} from "../../redux/action";
-import {ReduxStoreType} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
-import {MyPosts} from "../Profile/MyPosts/MyPosts";
 import StoreContext from "../../StoreContext";
+import {connect} from "react-redux";
+import {AppRootState, store} from "../../redux/redux-store";
+import {DialogsPageType} from "../../redux/dialogs-reducer";
+import {Dispatch} from "redux";
 
-// type DialogsContainerPropsType = {
-//   store: ReduxStoreType
-// }
+// export const DialogsContainer = () => {
+//
+//   // const state = props.store.getState().dialogsPage;
+//   //
+//   // const addMessage = () => {
+//   //   props.store.dispatch(addMessageAC(state.newMessageText))
+//   // }
+//   //
+//   // const onMessageChange = (text: string) => {
+//   //   props.store.dispatch(addNewMessageTextAC(text))
+//   // }
+//
+//   return (<StoreContext.Consumer>
+//     {(store) => {
+//
+//       const state = store.getState().dialogsPage;
+//
+//       const addMessage = () => {
+//         store.dispatch(addMessageAC(state.newMessageText))
+//       }
+//
+//       const onMessageChange = (text: string) => {
+//         store.dispatch(addNewMessageTextAC(text))
+//       }
+//
+//       return  <Dialogs
+//         addMessage={addMessage}
+//         onMessageChange={onMessageChange}
+//         dialogsPage={state}
+//       />}
+//     }
+//   </StoreContext.Consumer>
+//   )
+// };
 
-export const DialogsContainer = () => {
+type MapStateToPropsType = {
+  dialogsPage: DialogsPageType
+}
 
-  // const state = props.store.getState().dialogsPage;
-  //
-  // const addMessage = () => {
-  //   props.store.dispatch(addMessageAC(state.newMessageText))
-  // }
-  //
-  // const onMessageChange = (text: string) => {
-  //   props.store.dispatch(addNewMessageTextAC(text))
-  // }
+type MapDispatchToPropsType = {
+  addMessage: () => void
+  onMessageChange: (text: string) => void
+}
 
-  return (<StoreContext.Consumer>
-    {(store) => {
+export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-      const state = store.getState().dialogsPage;
+const mapStateToProps = (state: AppRootState): MapStateToPropsType => {
+  return {
+    dialogsPage: state.dialogsPage
+  }
+}
 
-      const addMessage = () => {
-        store.dispatch(addMessageAC(state.newMessageText))
-      }
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+  return {
+    addMessage: () => {
+      dispatch(addMessageAC())
+    },
+    onMessageChange: (text: string) => {
+      dispatch(addNewMessageTextAC(text))
+    },
+  }
+}
 
-      const onMessageChange = (text: string) => {
-        store.dispatch(addNewMessageTextAC(text))
-      }
-
-      return  <Dialogs
-        addMessage={addMessage}
-        onMessageChange={onMessageChange}
-        dialogsPage={state}
-      />}
-    }
-  </StoreContext.Consumer>
-  )
-};
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);

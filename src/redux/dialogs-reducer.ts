@@ -38,17 +38,17 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
     case ACTIONS_TYPE.ADD_MESSAGE_CALLBACK:
       const newMessage: MessageType = {
         id: v1(),
-        ...action.payload
+        message: state.newMessageText
+        // ...action.payload,
         // message: action.messageText
       }
-      state.messages.push(newMessage)
-      state.newMessageText = ''
-      // renderOnChange()
-      return state
+      return {
+        ...state,
+        newMessageText: '',
+        messages: [...state.messages, newMessage]
+      }
 
     case ACTIONS_TYPE.ADD_NEW_MESSAGE_TEXT_CALLBACK:
-      // state.newMessageText = action.newMessageText
-      // renderOnChange()
       return {
         ...state,
         ...action.payload

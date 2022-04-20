@@ -7,40 +7,40 @@ let renderOnChange = () => {
   console.log('Hello')
 }
 
-export const subscribe = (renderEntireTree: () => void) => {
+const subscribe = (renderEntireTree: () => void) => {
   renderOnChange = renderEntireTree
 }
 
-export type PostType = {
+type PostType = {
   id: string
   post: string
   likeCount: number
 }
-export type DialogType = {
+type DialogType = {
   id: string
   name: string
 }
-export type MessageType = {
+type MessageType = {
   id: string
   message: string
 }
-export type ProfilePageType = {
+type ProfilePageType = {
   posts: PostType[]
   newPostText: string
 }
-export type DialogsPageType = {
+type DialogsPageType = {
   newMessageText: string
   dialogs: DialogType[]
   messages: MessageType[]
 }
-export type Sidebar = {}
-export type RootStateType = {
+type Sidebar = {}
+type RootStateType = {
   profilePage: ProfilePageType
   dialogsPage: DialogsPageType
   sidebar?: Sidebar
 }
 
-export type StoreType = {
+type StoreType = {
   _state: RootStateType
   renderOnChange: () => void
   subscribe: (renderEntireTree: () => void) => void
@@ -48,7 +48,7 @@ export type StoreType = {
   dispatch: (action: ActionsTypes) => void
 }
 
-export const Store: StoreType = {
+const Store: StoreType = {
   _state: {
     profilePage: {
       newPostText: '',

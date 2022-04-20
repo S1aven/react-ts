@@ -1,44 +1,73 @@
 import React from 'react';
 import {addNewPostTextAC, addPostAC} from "../../../redux/action";
 import {MyPosts} from "./MyPosts";
-// import {ReduxStoreType} from "../../../redux/redux-store";
 import StoreContext from '../../../StoreContext';
+import {connect} from "react-redux";
+import {AppRootState, store} from "../../../redux/redux-store";
+import {ProfilePageType} from "../../../redux/profile-reducer";
+import {Dispatch} from "redux";
 
-// type MyPostsContainerPropsType = {
-//   store: ReduxStoreType
-// }
+// export const MyPostsContainer = () => {
+//
+//   const state = props.store.getState().profilePage;
+//
+//   const addPost = () => {
+//     props.store.dispatch(addPostAC(state.newPostText))
+//   }
+//
+//   const onPostChange = (text: string) => {
+//     props.store.dispatch(addNewPostTextAC(text))
+//   }
+//
+//   return (<StoreContext.Consumer>
+//       {(store) => {
+//
+//         const state = store.getState().profilePage;
+//
+//         const addPost = () => {
+//           store.dispatch(addPostAC(state.newPostText))
+//         }
+//
+//         const onPostChange = (text: string) => {
+//           store.dispatch(addNewPostTextAC(text))
+//         }
+//
+//         return <MyPosts
+//           onPostChange={onPostChange}
+//           profilePage={state}
+//           addPost={addPost}
+//         />}
+//       }
+//     </StoreContext.Consumer>
+//   )
+// };
 
-export const MyPostsContainer = () => {
+type MapStateToPropsType = {
+  profilePage: ProfilePageType
+}
 
-  // const state = props.store.getState().profilePage;
-  //
-  // const addPost = () => {
-  //   props.store.dispatch(addPostAC(state.newPostText))
-  // }
-  //
-  // const onPostChange = (text: string) => {
-  //   props.store.dispatch(addNewPostTextAC(text))
-  // }
+type MapDispatchToPropsType = {
+  addPost: () => void
+  onPostChange: (text: string) => void
+}
 
-  return (<StoreContext.Consumer>
-      {(store) => {
+export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-        const state = store.getState().profilePage;
+export const MapStateToProps = (state: AppRootState): MapStateToPropsType => {
+  return {
+    profilePage: state.profilePage
+  }
+}
 
-        const addPost = () => {
-          store.dispatch(addPostAC(state.newPostText))
-        }
+export const MapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+  return{
+    addPost: () => {
+      dispatch(addPostAC())
+    } ,
+    onPostChange: (text: string) => {
+      dispatch(addNewPostTextAC(text))
+    }
+  }
+}
 
-        const onPostChange = (text: string) => {
-          store.dispatch(addNewPostTextAC(text))
-        }
-
-        return <MyPosts
-          onPostChange={onPostChange}
-          profilePage={state}
-          addPost={addPost}
-        />}
-      }
-    </StoreContext.Consumer>
-  )
-};
+export const MyPostsContainer = connect(MapStateToProps, MapDispatchToProps)(MyPosts)
