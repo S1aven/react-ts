@@ -38,8 +38,8 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
     case ACTIONS_TYPE.ADD_MESSAGE_CALLBACK:
       const newMessage: MessageType = {
         id: v1(),
-        message: state.newMessageText
-        // ...action.payload,
+        // message: state.newMessageText
+        ...action.payload,
         // message: action.messageText
       }
       return {

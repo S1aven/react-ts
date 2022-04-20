@@ -25,12 +25,12 @@ export const addNewPostTextAC = (newPostText: string) => {
   } as const
 }
 
-export const addMessageAC = () => {
+export const addMessageAC = (message: string) => {
   return {
     type: ACTIONS_TYPE.ADD_MESSAGE_CALLBACK,
-    // payload: {
-    //   message
-    // },
+    payload: {
+      message
+    },
     // messageText: messageText
   } as const
 }
