@@ -15,6 +15,9 @@ export const Navbar = () => {
         <NavLink className={({isActive}) => isActive ? s.active : s.item} to={'/dialogs'}>Messages</NavLink>
       </div>
       <div className={s.item}>
+        <NavLink className={({isActive}) => isActive ? s.active : s.item} to={'/users'}>Users</NavLink>
+      </div>
+      <div className={s.item}>
         <NavLink className={({isActive}) => isActive ? s.active : s.item} to={'@'}>News</NavLink>
       </div>
       <div className={s.item}>

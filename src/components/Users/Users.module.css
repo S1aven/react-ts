@@ -1,0 +1,28 @@
+.users {
+
+}
+
+.user {
+  display: flex;
+}
+
+.userAvatar {
+  display: flex;
+  flex-direction: column;
+}
+
+.userAvatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.userData{
+  display: flex;
+  border: 1px solid black;
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-left: 10px;
+}
