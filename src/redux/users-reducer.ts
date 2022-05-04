@@ -1,18 +1,31 @@
 import {ACTIONS_TYPE, ActionsTypes} from "./action";
 
+// export type UsersType = {
+//   id: string
+//   avatar: string
+//   name: string
+//   status: string
+//   followed: boolean
+//   location: LocationType
+// }
+
 export type UsersType = {
-  id: string
-  avatar: string
   name: string
-  status: string
+  id: number
+  photos: Photos
+  status: string | null
   followed: boolean
-  location: LocationType
 }
 
-export type LocationType = {
-  city: string
-  country: string
+export type Photos = {
+  small: string | undefined
+  large: string | undefined
 }
+
+// export type LocationType = {
+//   city: string
+//   country: string
+// }
 
 export type UsersPageType = {
   users: UsersType[]
@@ -30,7 +43,7 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
     case ACTIONS_TYPE.FOLLOW_CALLBACK:
       return {
         ...state,
-        users: state.users.map(user => user.id === action.payload.userId ? {...user, followed: true} : user)
+        users: state.users.map(user => user.id === action.payload.userId? {...user, followed: true} : user)
       }
 
     case ACTIONS_TYPE.UNFOLLOW_CALLBACK:

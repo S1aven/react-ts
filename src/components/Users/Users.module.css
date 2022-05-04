@@ -4,6 +4,7 @@
 
 .user {
   display: flex;
+  margin-bottom: 10px;
 }
 
 .userAvatar {

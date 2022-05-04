@@ -56,7 +56,7 @@ export const addNewMessageTextAC = (newMessageText: string) => {
 
 // UsersPage
 
-export const followAC = (userId: string) => {
+export const followAC = (userId: number) => {
   return {
     type: ACTIONS_TYPE.FOLLOW_CALLBACK,
     payload: {
@@ -65,7 +65,7 @@ export const followAC = (userId: string) => {
   } as const
 }
 
-export const unfollowAC = (userId: string) => {
+export const unfollowAC = (userId: number) => {
   return {
     type: ACTIONS_TYPE.UNFOLLOW_CALLBACK,
     payload: {
