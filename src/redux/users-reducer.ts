@@ -12,6 +12,7 @@ import {ACTIONS_TYPE, ActionsTypes} from "./action";
 export type UsersType = {
   name: string
   id: number
+  uniqueUrlName: string | null
   photos: Photos
   status: string | null
   followed: boolean
