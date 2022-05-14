@@ -24,15 +24,6 @@ export const Users: React.FC<PropsType> = (props) => {
 
   return (
     <div className={s.users}>
-      <div className={s.pagination}>
-        {arrayPages.map(page => {
-          return <span
-            className={props.currentPage === page ? s.active : ''}
-            key={page}
-            onClick={() => props.setCurrentPage(page)}
-          >{page}-</span>
-        })}
-      </div>
       {props.users.map(user => {
         return <div key={user.id} className={s.user}>
           <div className={s.userAvatar}>
@@ -49,6 +40,15 @@ export const Users: React.FC<PropsType> = (props) => {
           </div>
         </div>
       })}
+      <div className={s.pagination}>
+        {arrayPages.map(page => {
+          return <span
+            className={props.currentPage === page ? s.active : ''}
+            key={page}
+            onClick={() => props.setCurrentPage(page)}
+          >{page}-</span>
+        })}
+      </div>
       <button
         // onClick={this.getUsers}
       >show more

@@ -9,7 +9,8 @@ export enum ACTIONS_TYPE {
   UNFOLLOW_CALLBACK = 'UsersPageExchange/UNFOLLOW_CALLBACK',
   SET_USERS = 'UsersPageExchange/SET_USERS',
   SET_CURRENT_PAGE = 'UsersPageExchange/SET_CURRENT_PAGE',
-  SET_TOTAL_USER_COUNT = 'UsersPageExchange/SET_TOTAL_USER_COUNT'
+  SET_TOTAL_USER_COUNT = 'UsersPageExchange/SET_TOTAL_USER_COUNT',
+  TOGGLE_IS_FETCHING = 'UsersPageExchange/TOGGLE_IS_FETCHING'
 }
 
 // ProfilePage
@@ -101,6 +102,15 @@ export const setTotalUsersCountAC = (totalUsersCount: number) => {
   } as const
 }
 
+export const toggleIsFetchingAC = (isFetching: boolean) => {
+  return {
+    type: ACTIONS_TYPE.TOGGLE_IS_FETCHING,
+    payload: {
+      isFetching
+    }
+  } as const
+}
+
 export type ActionsTypes = ReturnType<typeof addPostAC>
   | ReturnType<typeof addMessageAC>
   | ReturnType<typeof addNewMessageTextAC>
@@ -110,3 +120,4 @@ export type ActionsTypes = ReturnType<typeof addPostAC>
   | ReturnType<typeof setUsersAC>
   | ReturnType<typeof setCurrentPageAC>
   | ReturnType<typeof setTotalUsersCountAC>
+  | ReturnType<typeof toggleIsFetchingAC>
