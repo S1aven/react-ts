@@ -1,14 +1,5 @@
 import {ACTIONS_TYPE, ActionsTypes} from "./action";
 
-// export type UsersType = {
-//   id: string
-//   avatar: string
-//   name: string
-//   status: string
-//   followed: boolean
-//   location: LocationType
-// }
-
 export type UsersType = {
   name: string
   id: number
@@ -22,11 +13,6 @@ export type Photos = {
   small: string | undefined
   large: string | undefined
 }
-
-// export type LocationType = {
-//   city: string
-//   country: string
-// }
 
 export type UsersPageType = {
   users: UsersType[]
