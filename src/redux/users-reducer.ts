@@ -30,12 +30,16 @@ export type Photos = {
 
 export type UsersPageType = {
   users: UsersType[]
+  pageSize: number
+  totalUsersCount: number
+  currentPage: number
 }
 
 const initialState: UsersPageType = {
-  users: [
-
-  ],
+  users: [],
+  pageSize: 5,
+  totalUsersCount: 1,
+  currentPage: 1
 }
 
 export const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
@@ -56,7 +60,19 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
     case ACTIONS_TYPE.SET_USERS:
       return {
         ...state,
-        users: [...state.users, ...action.users]
+        users: action.users
+      }
+
+    case ACTIONS_TYPE.SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload.currentPage
+      }
+
+    case ACTIONS_TYPE.SET_TOTAL_USER_COUNT:
+      return {
+        ...state,
+        totalUsersCount: action.payload.totalUsersCount
       }
 
     default:

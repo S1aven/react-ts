@@ -5,9 +5,11 @@ export enum ACTIONS_TYPE {
   ADD_NEW_POST_TEXT_CALLBACK = 'ProfilePageExchange/ADD_NEW_POST_TEXT_CALLBACK',
   ADD_MESSAGE_CALLBACK = 'DialogsPageExchange/ADD_MESSAGE_CALLBACK',
   ADD_NEW_MESSAGE_TEXT_CALLBACK = 'DialogsPageExchange/ADD_NEW_MESSAGE_TEXT_CALLBACK',
-  FOLLOW_CALLBACK = 'UsersPage/FOLLOW_CALLBACK',
-  UNFOLLOW_CALLBACK = 'UsersPage/UNFOLLOW_CALLBACK',
-  SET_USERS = 'UsersPage/SET_USERS',
+  FOLLOW_CALLBACK = 'UsersPageExchange/FOLLOW_CALLBACK',
+  UNFOLLOW_CALLBACK = 'UsersPageExchange/UNFOLLOW_CALLBACK',
+  SET_USERS = 'UsersPageExchange/SET_USERS',
+  SET_CURRENT_PAGE = 'UsersPageExchange/SET_CURRENT_PAGE',
+  SET_TOTAL_USER_COUNT = 'UsersPageExchange/SET_TOTAL_USER_COUNT'
 }
 
 // ProfilePage
@@ -81,6 +83,24 @@ export const setUsersAC = (users: UsersType[]) => {
   } as const
 }
 
+export const setCurrentPageAC = (currentPage: number) => {
+  return {
+    type: ACTIONS_TYPE.SET_CURRENT_PAGE,
+    payload: {
+      currentPage
+    },
+  } as const
+}
+
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
+  return {
+    type: ACTIONS_TYPE.SET_TOTAL_USER_COUNT,
+    payload: {
+      totalUsersCount
+    },
+  } as const
+}
+
 export type ActionsTypes = ReturnType<typeof addPostAC>
   | ReturnType<typeof addMessageAC>
   | ReturnType<typeof addNewMessageTextAC>
@@ -88,3 +108,5 @@ export type ActionsTypes = ReturnType<typeof addPostAC>
   | ReturnType<typeof followAC>
   | ReturnType<typeof unfollowAC>
   | ReturnType<typeof setUsersAC>
+  | ReturnType<typeof setCurrentPageAC>
+  | ReturnType<typeof setTotalUsersCountAC>
