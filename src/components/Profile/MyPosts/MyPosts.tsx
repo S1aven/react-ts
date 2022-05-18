@@ -11,8 +11,8 @@ export const MyPosts:React.FC<MyPostsPropsType> = (props) => {
     props.addPost()
   }
 
-  const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.onPostChange(e.currentTarget.value)
+  const addNewPostText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    props.addNewPostText(e.currentTarget.value)
   }
 
   return (
@@ -20,7 +20,7 @@ export const MyPosts:React.FC<MyPostsPropsType> = (props) => {
       <h3>My posts</h3>
       <div>
         <div>
-          <textarea onChange={onPostChange} value={props.profilePage.newPostText}/>
+          <textarea onChange={addNewPostText} value={props.profilePage.newPostText}/>
         </div>
         <div>
           <button onClick={addPost}>Add</button>

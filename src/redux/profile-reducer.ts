@@ -32,8 +32,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
       }
       return {
         ...state,
-        newPostText: state.newPostText,
-        posts: [...state.posts, newPost]
+        newPostText: '',
+        posts: [...state.posts, newPost],
       }
 
     case ACTIONS_TYPE.ADD_NEW_POST_TEXT_CALLBACK:

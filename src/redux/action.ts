@@ -15,7 +15,7 @@ export enum ACTIONS_TYPE {
 
 // ProfilePage
 
-export const addPostAC = () => {
+export const addPost = () => {
   return {
     type: ACTIONS_TYPE.ADD_POST_CALLBACK,
     // payload: {
@@ -25,41 +25,38 @@ export const addPostAC = () => {
   } as const
 }
 
-export const addNewPostTextAC = (newPostText: string) => {
+export const addNewPostText = (newPostText: string) => {
   return {
     type: ACTIONS_TYPE.ADD_NEW_POST_TEXT_CALLBACK,
     payload: {
       newPostText
     }
-    // newPostText: newPostText
   } as const
 }
 
 // MessagePage
 
-export const addMessageAC = (message: string) => {
+export const addMessage = () => {
   return {
     type: ACTIONS_TYPE.ADD_MESSAGE_CALLBACK,
-    payload: {
-      message
-    },
-    // messageText: messageText
+    // payload: {
+    //   message
+    // },
   } as const
 }
 
-export const addNewMessageTextAC = (newMessageText: string) => {
+export const addNewMessageText = (newMessageText: string) => {
   return {
     type: ACTIONS_TYPE.ADD_NEW_MESSAGE_TEXT_CALLBACK,
     payload: {
       newMessageText
     },
-    // newMessageText: newMessageText
   } as const
 }
 
 // UsersPage
 
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
   return {
     type: ACTIONS_TYPE.FOLLOW_CALLBACK,
     payload: {
@@ -68,7 +65,7 @@ export const followAC = (userId: number) => {
   } as const
 }
 
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
   return {
     type: ACTIONS_TYPE.UNFOLLOW_CALLBACK,
     payload: {
@@ -77,14 +74,14 @@ export const unfollowAC = (userId: number) => {
   } as const
 }
 
-export const setUsersAC = (users: UsersType[]) => {
+export const setUsers = (users: UsersType[]) => {
   return {
     type: ACTIONS_TYPE.SET_USERS,
     users
   } as const
 }
 
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
   return {
     type: ACTIONS_TYPE.SET_CURRENT_PAGE,
     payload: {
@@ -93,7 +90,7 @@ export const setCurrentPageAC = (currentPage: number) => {
   } as const
 }
 
-export const setTotalUsersCountAC = (totalUsersCount: number) => {
+export const setTotalUsersCount = (totalUsersCount: number) => {
   return {
     type: ACTIONS_TYPE.SET_TOTAL_USER_COUNT,
     payload: {
@@ -102,7 +99,7 @@ export const setTotalUsersCountAC = (totalUsersCount: number) => {
   } as const
 }
 
-export const toggleIsFetchingAC = (isFetching: boolean) => {
+export const toggleIsFetching = (isFetching: boolean) => {
   return {
     type: ACTIONS_TYPE.TOGGLE_IS_FETCHING,
     payload: {
@@ -111,13 +108,13 @@ export const toggleIsFetchingAC = (isFetching: boolean) => {
   } as const
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC>
-  | ReturnType<typeof addMessageAC>
-  | ReturnType<typeof addNewMessageTextAC>
-  | ReturnType<typeof addNewPostTextAC>
-  | ReturnType<typeof followAC>
-  | ReturnType<typeof unfollowAC>
-  | ReturnType<typeof setUsersAC>
-  | ReturnType<typeof setCurrentPageAC>
-  | ReturnType<typeof setTotalUsersCountAC>
-  | ReturnType<typeof toggleIsFetchingAC>
+export type ActionsTypes = ReturnType<typeof addPost>
+  | ReturnType<typeof addMessage>
+  | ReturnType<typeof addNewMessageText>
+  | ReturnType<typeof addNewPostText>
+  | ReturnType<typeof follow>
+  | ReturnType<typeof unfollow>
+  | ReturnType<typeof setUsers>
+  | ReturnType<typeof setCurrentPage>
+  | ReturnType<typeof setTotalUsersCount>
+  | ReturnType<typeof toggleIsFetching>

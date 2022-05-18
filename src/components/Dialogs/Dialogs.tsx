@@ -13,8 +13,8 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     props.addMessage()
   }
 
-  const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.onMessageChange(e.currentTarget.value)
+  const addNewMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    props.addNewMessageText(e.currentTarget.value)
   }
 
   return (
@@ -25,7 +25,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
       <div className={s.messages}>
         {messageElements}
         <div>
-          <textarea onChange={onMessageChange} value={props.dialogsPage.newMessageText}/>
+          <textarea onChange={addNewMessageText} value={props.dialogsPage.newMessageText}/>
           <button onClick={addMessage}>Add</button>
         </div>
       </div>
