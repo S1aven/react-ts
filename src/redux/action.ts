@@ -1,4 +1,5 @@
 import {UsersType} from "./users-reducer";
+import {ProfileType} from "./profile-reducer";
 
 export enum ACTIONS_TYPE {
   ADD_POST_CALLBACK = 'ProfilePageExchange/ADD_POST_CALLBACK',
@@ -10,7 +11,8 @@ export enum ACTIONS_TYPE {
   SET_USERS = 'UsersPageExchange/SET_USERS',
   SET_CURRENT_PAGE = 'UsersPageExchange/SET_CURRENT_PAGE',
   SET_TOTAL_USER_COUNT = 'UsersPageExchange/SET_TOTAL_USER_COUNT',
-  TOGGLE_IS_FETCHING = 'UsersPageExchange/TOGGLE_IS_FETCHING'
+  TOGGLE_IS_FETCHING = 'UsersPageExchange/TOGGLE_IS_FETCHING',
+  SET_USER_PROFILE_CALLBACK = 'ProfilePageExchange/SET_USER_PROFILE_CALLBACK'
 }
 
 // ProfilePage
@@ -30,6 +32,15 @@ export const addNewPostText = (newPostText: string) => {
     type: ACTIONS_TYPE.ADD_NEW_POST_TEXT_CALLBACK,
     payload: {
       newPostText
+    }
+  } as const
+}
+
+export const setUserProfile = (profile: ProfileType) => {
+  return {
+    type: ACTIONS_TYPE.SET_USER_PROFILE_CALLBACK,
+    payload: {
+      profile
     }
   } as const
 }
@@ -118,3 +129,4 @@ export type ActionsTypes = ReturnType<typeof addPost>
   | ReturnType<typeof setCurrentPage>
   | ReturnType<typeof setTotalUsersCount>
   | ReturnType<typeof toggleIsFetching>
+  | ReturnType<typeof setUserProfile>

@@ -1,7 +1,6 @@
 import {connect} from "react-redux";
 import {AppRootState} from "../../redux/redux-store";
 import {UsersType} from "../../redux/users-reducer";
-// import {Dispatch} from "redux";
 import {
   follow, toggleIsFetching,
   setCurrentPage,

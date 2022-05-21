@@ -1,4 +1,4 @@
-import {profileReducer} from "./profile-reducer";
+import {profileReducer, ProfileType} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {v1} from "uuid";
 import {ActionsTypes} from "./action";
@@ -27,6 +27,7 @@ type MessageType = {
 type ProfilePageType = {
   posts: PostType[]
   newPostText: string
+  profile: null | ProfileType
 }
 type DialogsPageType = {
   newMessageText: string
@@ -51,6 +52,7 @@ type StoreType = {
 const Store: StoreType = {
   _state: {
     profilePage: {
+      profile: null,
       newPostText: '',
       posts: [
         {id: v1(), post: 'Hi, how are you?', likeCount: 15},
