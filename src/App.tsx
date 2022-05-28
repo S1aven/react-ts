@@ -15,9 +15,10 @@ export const App = () => {
         <Navbar/>
         <div className={'app-wrapper-content'}>
           <Routes>
-            <Route path={'/profile/*'} element={<ProfileContainer />}/>
-            <Route path={'/dialogs/*'} element={<DialogsContainer />}/>
-            <Route path={'/users/*'} element={<UsersContainer />}/>
+            <Route path={'/profile/:userId'} element={<ProfileContainer/>}/>
+            <Route path={'/profile/*'} element={<ProfileContainer/>}/>
+            <Route path={'/dialogs/*'} element={<DialogsContainer/>}/>
+            <Route path={'/users/*'} element={<UsersContainer/>}/>
           </Routes>
         </div>
       </div>
