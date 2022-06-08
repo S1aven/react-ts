@@ -1,5 +1,6 @@
 import {UsersType} from "./users-reducer";
 import {ProfileType} from "./profile-reducer";
+import {initialStateType} from "./auth-reducer";
 
 export enum ACTIONS_TYPE {
   ADD_POST_CALLBACK = 'ProfilePageExchange/ADD_POST_CALLBACK',
@@ -12,7 +13,19 @@ export enum ACTIONS_TYPE {
   SET_CURRENT_PAGE = 'UsersPageExchange/SET_CURRENT_PAGE',
   SET_TOTAL_USER_COUNT = 'UsersPageExchange/SET_TOTAL_USER_COUNT',
   TOGGLE_IS_FETCHING = 'UsersPageExchange/TOGGLE_IS_FETCHING',
-  SET_USER_PROFILE_CALLBACK = 'ProfilePageExchange/SET_USER_PROFILE_CALLBACK'
+  SET_USER_PROFILE_CALLBACK = 'ProfilePageExchange/SET_USER_PROFILE_CALLBACK',
+  SET_USER_DATA = 'SET_USER_DATA'
+}
+
+// Auth
+
+export const setAuthUserData = (data: initialStateType) => {
+  return {
+    type: ACTIONS_TYPE.SET_USER_DATA,
+    payload: {
+      data
+    }
+  } as const
 }
 
 // ProfilePage
@@ -20,10 +33,6 @@ export enum ACTIONS_TYPE {
 export const addPost = () => {
   return {
     type: ACTIONS_TYPE.ADD_POST_CALLBACK,
-    // payload: {
-    //   post
-    // }
-    // postText: postText
   } as const
 }
 
@@ -50,9 +59,6 @@ export const setUserProfile = (profile: ProfileType) => {
 export const addMessage = () => {
   return {
     type: ACTIONS_TYPE.ADD_MESSAGE_CALLBACK,
-    // payload: {
-    //   message
-    // },
   } as const
 }
 
@@ -130,3 +136,4 @@ export type ActionsTypes = ReturnType<typeof addPost>
   | ReturnType<typeof setTotalUsersCount>
   | ReturnType<typeof toggleIsFetching>
   | ReturnType<typeof setUserProfile>
+  | ReturnType<typeof setAuthUserData>
