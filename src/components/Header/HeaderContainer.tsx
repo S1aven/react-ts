@@ -8,9 +8,7 @@ import {authMeAPI} from "../../api/api";
 
 class HeaderContainer extends React.Component<PropsType, PropsType> {
   componentDidMount() {
-    // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-    //   withCredentials: true
-    // })
+
     authMeAPI.authMe()
       .then(data => {
         if (data.resultCode === 0) {

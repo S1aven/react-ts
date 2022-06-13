@@ -20,6 +20,7 @@ export type UsersPageType = {
   totalUsersCount: number
   currentPage: number
   isFetching: boolean
+  followingInProgress: number[]
 }
 
 const initialState: UsersPageType = {
@@ -27,7 +28,8 @@ const initialState: UsersPageType = {
   pageSize: 5,
   totalUsersCount: 1,
   currentPage: 1,
-  isFetching: false
+  isFetching: false,
+  followingInProgress: []
 }
 
 export const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
@@ -36,7 +38,7 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
     case ACTIONS_TYPE.FOLLOW_CALLBACK:
       return {
         ...state,
-        users: state.users.map(user => user.id === action.payload.userId? {...user, followed: true} : user)
+        users: state.users.map(user => user.id === action.payload.userId ? {...user, followed: true} : user)
       }
 
     case ACTIONS_TYPE.UNFOLLOW_CALLBACK:
@@ -67,6 +69,13 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
       return {
         ...state,
         isFetching: action.payload.isFetching
+      }
+    case ACTIONS_TYPE.TOGGLE_IS_FOLLOWING_PROGRESS:
+      return {
+        ...state,
+        followingInProgress: action.payload.isFetching
+          ? [...state.followingInProgress, action.payload.userId]
+          : state.followingInProgress.filter(userId => userId !== action.payload.userId)
       }
 
     default:

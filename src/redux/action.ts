@@ -14,7 +14,8 @@ export enum ACTIONS_TYPE {
   SET_TOTAL_USER_COUNT = 'UsersPageExchange/SET_TOTAL_USER_COUNT',
   TOGGLE_IS_FETCHING = 'UsersPageExchange/TOGGLE_IS_FETCHING',
   SET_USER_PROFILE_CALLBACK = 'ProfilePageExchange/SET_USER_PROFILE_CALLBACK',
-  SET_USER_DATA = 'SET_USER_DATA'
+  SET_USER_DATA = 'SET_USER_DATA',
+  TOGGLE_IS_FOLLOWING_PROGRESS = 'UsersPageExchange/TOGGLE_IS_FOLLOWING_PROGRESS'
 }
 
 // Auth
@@ -125,6 +126,16 @@ export const toggleIsFetching = (isFetching: boolean) => {
   } as const
 }
 
+export const toggleIsFollowingProgress = (userId: number, isFetching: boolean) => {
+  return {
+    type: ACTIONS_TYPE.TOGGLE_IS_FOLLOWING_PROGRESS,
+    payload: {
+      userId,
+      isFetching
+    }
+  } as const
+}
+
 export type ActionsTypes = ReturnType<typeof addPost>
   | ReturnType<typeof addMessage>
   | ReturnType<typeof addNewMessageText>
@@ -137,3 +148,4 @@ export type ActionsTypes = ReturnType<typeof addPost>
   | ReturnType<typeof toggleIsFetching>
   | ReturnType<typeof setUserProfile>
   | ReturnType<typeof setAuthUserData>
+  | ReturnType<typeof toggleIsFollowingProgress>
