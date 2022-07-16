@@ -3,7 +3,7 @@ import s from "./Profile.module.css";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppRootState} from "../../redux/redux-store";
-import {setUserProfile} from "../../redux/action";
+import {setUserProfile} from "../../redux/action-thunk";
 import {ProfileType} from "../../redux/profile-reducer";
 import {
   useLocation,

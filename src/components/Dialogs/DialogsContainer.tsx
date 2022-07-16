@@ -1,4 +1,4 @@
-import {addMessage, addNewMessageText} from "../../redux/action";
+import {addMessage, addNewMessageText} from "../../redux/action-thunk";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppRootState} from "../../redux/redux-store";

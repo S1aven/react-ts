@@ -1,7 +1,7 @@
 import {profileReducer, ProfileType} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {v1} from "uuid";
-import {ActionsTypes} from "./action";
+import {ActionsTypes} from "./action-thunk";
 
 let renderOnChange = () => {
   console.log('Hello')

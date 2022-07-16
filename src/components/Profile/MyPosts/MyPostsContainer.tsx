@@ -1,4 +1,4 @@
-import {addNewPostText, addPost} from "../../../redux/action";
+import {addNewPostText, addPost} from "../../../redux/action-thunk";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {AppRootState} from "../../../redux/redux-store";

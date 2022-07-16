@@ -1,6 +1,8 @@
 import {UsersType} from "./users-reducer";
 import {ProfileType} from "./profile-reducer";
 import {initialStateType} from "./auth-reducer";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export enum ACTIONS_TYPE {
   ADD_POST_CALLBACK = 'ProfilePageExchange/ADD_POST_CALLBACK',
@@ -14,7 +16,7 @@ export enum ACTIONS_TYPE {
   SET_TOTAL_USER_COUNT = 'UsersPageExchange/SET_TOTAL_USER_COUNT',
   TOGGLE_IS_FETCHING = 'UsersPageExchange/TOGGLE_IS_FETCHING',
   SET_USER_PROFILE_CALLBACK = 'ProfilePageExchange/SET_USER_PROFILE_CALLBACK',
-  SET_USER_DATA = 'SET_USER_DATA',
+  SET_USER_DATA = 'Auth/SET_USER_DATA',
   TOGGLE_IS_FOLLOWING_PROGRESS = 'UsersPageExchange/TOGGLE_IS_FOLLOWING_PROGRESS'
 }
 
@@ -74,7 +76,7 @@ export const addNewMessageText = (newMessageText: string) => {
 
 // UsersPage
 
-export const follow = (userId: number) => {
+export const followSuccess = (userId: number) => {
   return {
     type: ACTIONS_TYPE.FOLLOW_CALLBACK,
     payload: {
@@ -83,7 +85,7 @@ export const follow = (userId: number) => {
   } as const
 }
 
-export const unfollow = (userId: number) => {
+export const unfollowSuccess = (userId: number) => {
   return {
     type: ACTIONS_TYPE.UNFOLLOW_CALLBACK,
     payload: {
@@ -136,12 +138,66 @@ export const toggleIsFollowingProgress = (userId: number, isFetching: boolean) =
   } as const
 }
 
+// Thunk
+
+export const getUsers = (currentPage: number, pageSize: number) => {
+  return (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true));
+
+    usersAPI.getUsers(currentPage, pageSize)
+      .then(data => {
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount));
+      });
+  }
+}
+
+export const getCurrentPage = (currentPage: number, pageSize: number) => {
+  return (dispatch: Dispatch) => {
+    dispatch(toggleIsFetching(true));
+    dispatch(setCurrentPage(currentPage));
+
+    usersAPI.getUsers(currentPage, pageSize)
+      .then(data => {
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+      });
+  }
+}
+
+export const follow = (userId: number) => {
+  return (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowingProgress(userId, true));
+    usersAPI.follow(userId)
+      .then(data => {
+        if (data.resultCode === 0) {
+          dispatch(followSuccess(userId));
+        }
+        dispatch(toggleIsFollowingProgress(userId, false));
+      });
+  }
+}
+
+export const unfollow = (userId: number) => {
+  return (dispatch: Dispatch) => {
+    dispatch(toggleIsFollowingProgress(userId, true));
+    usersAPI.unfollow(userId)
+      .then(data => {
+        if (data.resultCode === 0) {
+          dispatch(unfollowSuccess(userId));
+        }
+        dispatch(toggleIsFollowingProgress(userId, false));
+      });
+  }
+}
+
 export type ActionsTypes = ReturnType<typeof addPost>
   | ReturnType<typeof addMessage>
   | ReturnType<typeof addNewMessageText>
   | ReturnType<typeof addNewPostText>
-  | ReturnType<typeof follow>
-  | ReturnType<typeof unfollow>
+  | ReturnType<typeof followSuccess>
+  | ReturnType<typeof unfollowSuccess>
   | ReturnType<typeof setUsers>
   | ReturnType<typeof setCurrentPage>
   | ReturnType<typeof setTotalUsersCount>

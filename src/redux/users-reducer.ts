@@ -1,4 +1,4 @@
-import {ACTIONS_TYPE, ActionsTypes} from "./action";
+import {ACTIONS_TYPE, ActionsTypes} from "./action-thunk";
 
 export type UsersType = {
   name: string

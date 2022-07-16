@@ -2,13 +2,14 @@ import React from 'react';
 import s from "./Users.module.css";
 import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
+// import {usersAPI} from "../../api/api";
+// import {followThunkCreator, unfollow, unfollowThunkCreator} from "../../redux/action-thunk";
 
 type PropsType = {
   follow: (userId: number) => void
   unfollow: (userId: number) => void
-  setCurrentPage: (currentPage: number) => void
-  toggleIsFollowingProgress: (userId: number, isFetching: boolean) => void
+  getCurrentPage: (currentPage: number) => void
+  // toggleIsFollowingProgress: (userId: number, isFetching: boolean) => void
   users: UsersType[]
   totalUsersCount: number
   pageSize: number
@@ -36,24 +37,30 @@ export const Users: React.FC<PropsType> = (props) => {
             </NavLink>
             {user.followed
               ? <button disabled={props.followingInProgress.some(userId => userId === user.id)} onClick={() => {
-                props.toggleIsFollowingProgress(user.id,true)
-                usersAPI.unfollow(user.id)
-                  .then(data => {
-                    if (data.resultCode === 0) {
-                      props.unfollow(user.id)
-                    }
-                    props.toggleIsFollowingProgress(user.id,false)
-                  });
+                  // unfollowThunkCreator(user.id)
+                  props.unfollow(user.id)
+
+                // props.toggleIsFollowingProgress(user.id,true)
+                // usersAPI.unfollow(user.id)
+                //   .then(data => {
+                //     if (data.resultCode === 0) {
+                //       props.unfollow(user.id)
+                //     }
+                //     props.toggleIsFollowingProgress(user.id,false)
+                //   });
               }}>unfollow</button>
               : <button disabled={props.followingInProgress.some(userId => userId === user.id)} onClick={() => {
-                props.toggleIsFollowingProgress(user.id,true)
-                usersAPI.follow(user.id)
-                  .then(data => {
-                    if (data.resultCode === 0) {
-                      props.follow(user.id)
-                    }
-                    props.toggleIsFollowingProgress(user.id,false)
-                  });
+                  // followThunkCreator(user.id)
+                  props.follow(user.id)
+
+                // props.toggleIsFollowingProgress(user.id,true)
+                // usersAPI.follow(user.id)
+                //   .then(data => {
+                //     if (data.resultCode === 0) {
+                //       props.follow(user.id)
+                //     }
+                //     props.toggleIsFollowingProgress(user.id,false)
+                //   });
               }}>follow</button>}
           </div>
           <div className={s.userData}>
@@ -69,7 +76,7 @@ export const Users: React.FC<PropsType> = (props) => {
           return <span
             className={props.currentPage === page ? s.active : ''}
             key={page}
-            onClick={() => props.setCurrentPage(page)}
+            onClick={() => props.getCurrentPage(page)}
           >{page}-</span>
         })}
       </div>

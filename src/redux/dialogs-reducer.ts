@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {ACTIONS_TYPE, ActionsTypes} from "./action";
+import {ACTIONS_TYPE, ActionsTypes} from "./action-thunk";
 
 export type DialogType = {
   id: string
