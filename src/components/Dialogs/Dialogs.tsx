@@ -3,6 +3,7 @@ import s from './Dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Navigate} from "react-router-dom";
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
@@ -15,6 +16,10 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
   const addNewMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
     props.addNewMessageText(e.currentTarget.value)
+  }
+
+  if (!props.isAuth) {
+    return <Navigate to={'/login'}/>
   }
 
   return (

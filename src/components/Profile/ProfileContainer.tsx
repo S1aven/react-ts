@@ -6,6 +6,7 @@ import {AppRootState} from "../../redux/redux-store";
 import {getProfile} from "../../redux/action-thunk";
 import {ProfileType} from "../../redux/profile-reducer";
 import {
+  Navigate,
   useLocation,
   useNavigate,
   useParams,
@@ -24,6 +25,10 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
   }
 
   render() {
+    if (!this.props.isAuth) {
+      return <Navigate to={'/login'}/>
+    }
+
     return (
       <div className={s.profile}>
         <Profile {...this.props} profile={this.props.profile}/>
@@ -38,6 +43,7 @@ type PathParamsType = {
 
 type MapStateToPropsType = {
   profile: null | ProfileType
+  isAuth: boolean
 };
 
 type MapDispatchToPropsType = {
@@ -50,7 +56,8 @@ export type ProfilePropsType = MapStateToPropsType & MapDispatchToPropsType
 
 const MapStateToProps = (state: AppRootState): MapStateToPropsType => {
   return {
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
   }
 }
 
