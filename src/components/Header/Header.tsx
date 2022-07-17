@@ -10,8 +10,7 @@ type PropsType = {
 export const Header = ({isAuth, login}: PropsType) => {
   return (
     <header className={s.header}>
-      <img
-        src={'https://res.cloudinary.com/moteefe/image/upload/v1555093947/store/logo_image/31d7f5bb-82de-43b4-bc3a-c55b5451315d.jpg'}/>
+      <img alt={'avatar'} src={'https://res.cloudinary.com/moteefe/image/upload/v1555093947/store/logo_image/31d7f5bb-82de-43b4-bc3a-c55b5451315d.jpg'}/>
       <div className={s.loadingBlock}>
         {
           isAuth

@@ -3,14 +3,13 @@ import s from "./Profile.module.css";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppRootState} from "../../redux/redux-store";
-import {setUserProfile} from "../../redux/action-thunk";
+import {getProfile} from "../../redux/action-thunk";
 import {ProfileType} from "../../redux/profile-reducer";
 import {
   useLocation,
   useNavigate,
   useParams,
 } from "react-router-dom";
-import {profileAPI} from "../../api/api";
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
 
@@ -21,10 +20,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
       userId = 2
     }
 
-    profileAPI.getProfile(userId)
-      .then(data => {
-        this.props.setUserProfile(data);
-      });
+    this.props.getProfile(userId);
   }
 
   render() {
@@ -45,7 +41,7 @@ type MapStateToPropsType = {
 };
 
 type MapDispatchToPropsType = {
-  setUserProfile: (profile: ProfileType) => void
+  getProfile: (userId: number) => void
 };
 
 export type ProfilePropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -78,4 +74,4 @@ function withRouter(Component: any) {
   return ComponentWithRouterProp;
 }
 
-export default connect(MapStateToProps, {setUserProfile})(withRouter(ProfileContainer));
+export default connect(MapStateToProps, {getProfile})(withRouter(ProfileContainer));

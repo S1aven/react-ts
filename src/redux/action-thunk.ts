@@ -1,7 +1,7 @@
 import {UsersType} from "./users-reducer";
 import {ProfileType} from "./profile-reducer";
 import {initialStateType} from "./auth-reducer";
-import {usersAPI} from "../api/api";
+import {authMeAPI, profileAPI, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 export enum ACTIONS_TYPE {
@@ -22,7 +22,7 @@ export enum ACTIONS_TYPE {
 
 // Auth
 
-export const setAuthUserData = (data: initialStateType) => {
+const setAuthUserData = (data: initialStateType) => {
   return {
     type: ACTIONS_TYPE.SET_USER_DATA,
     payload: {
@@ -48,7 +48,7 @@ export const addNewPostText = (newPostText: string) => {
   } as const
 }
 
-export const setUserProfile = (profile: ProfileType) => {
+const setUserProfile = (profile: ProfileType) => {
   return {
     type: ACTIONS_TYPE.SET_USER_PROFILE_CALLBACK,
     payload: {
@@ -76,7 +76,7 @@ export const addNewMessageText = (newMessageText: string) => {
 
 // UsersPage
 
-export const followSuccess = (userId: number) => {
+const followSuccess = (userId: number) => {
   return {
     type: ACTIONS_TYPE.FOLLOW_CALLBACK,
     payload: {
@@ -85,7 +85,7 @@ export const followSuccess = (userId: number) => {
   } as const
 }
 
-export const unfollowSuccess = (userId: number) => {
+const unfollowSuccess = (userId: number) => {
   return {
     type: ACTIONS_TYPE.UNFOLLOW_CALLBACK,
     payload: {
@@ -94,14 +94,14 @@ export const unfollowSuccess = (userId: number) => {
   } as const
 }
 
-export const setUsers = (users: UsersType[]) => {
+const setUsers = (users: UsersType[]) => {
   return {
     type: ACTIONS_TYPE.SET_USERS,
     users
   } as const
 }
 
-export const setCurrentPage = (currentPage: number) => {
+const setCurrentPage = (currentPage: number) => {
   return {
     type: ACTIONS_TYPE.SET_CURRENT_PAGE,
     payload: {
@@ -110,7 +110,7 @@ export const setCurrentPage = (currentPage: number) => {
   } as const
 }
 
-export const setTotalUsersCount = (totalUsersCount: number) => {
+const setTotalUsersCount = (totalUsersCount: number) => {
   return {
     type: ACTIONS_TYPE.SET_TOTAL_USER_COUNT,
     payload: {
@@ -119,7 +119,7 @@ export const setTotalUsersCount = (totalUsersCount: number) => {
   } as const
 }
 
-export const toggleIsFetching = (isFetching: boolean) => {
+const toggleIsFetching = (isFetching: boolean) => {
   return {
     type: ACTIONS_TYPE.TOGGLE_IS_FETCHING,
     payload: {
@@ -188,6 +188,26 @@ export const unfollow = (userId: number) => {
           dispatch(unfollowSuccess(userId));
         }
         dispatch(toggleIsFollowingProgress(userId, false));
+      });
+  }
+}
+
+export const getProfile = (userId: number) => {
+  return (dispatch: Dispatch) => {
+    profileAPI.getProfile(userId)
+      .then(data => {
+        dispatch(setUserProfile(data));
+      });
+  }
+}
+
+export const getAuthMe = () => {
+  return (dispatch: Dispatch) => {
+    authMeAPI.authMe()
+      .then(data => {
+        if (data.resultCode === 0) {
+          dispatch(setAuthUserData(data.data));
+        }
       });
   }
 }
