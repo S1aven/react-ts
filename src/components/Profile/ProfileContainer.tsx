@@ -6,11 +6,11 @@ import {AppRootState} from "../../redux/redux-store";
 import {getProfile} from "../../redux/action-thunk";
 import {ProfileType} from "../../redux/profile-reducer";
 import {
-  Navigate,
   useLocation,
   useNavigate,
   useParams,
 } from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
 
@@ -25,10 +25,6 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
   }
 
   render() {
-    if (!this.props.isAuth) {
-      return <Navigate to={'/login'}/>
-    }
-
     return (
       <div className={s.profile}>
         <Profile {...this.props} profile={this.props.profile}/>
@@ -37,13 +33,22 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
   }
 }
 
+//=======================================
+
+// let AuthRedirectComponent = (props: ProfilePropsType) => {
+//   if (!props.isAuth) {
+//     return <Navigate to={'/login'}/>
+//   }
+//   return <ProfileContainer {...props}/>
+// }
+
 type PathParamsType = {
   userId?: string
 }
 
 type MapStateToPropsType = {
   profile: null | ProfileType
-  isAuth: boolean
+  // isAuth: boolean
 };
 
 type MapDispatchToPropsType = {
@@ -54,14 +59,15 @@ export type ProfilePropsType = MapStateToPropsType & MapDispatchToPropsType
 // export type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
 
-const MapStateToProps = (state: AppRootState): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootState): MapStateToPropsType => {
   return {
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
+    // isAuth: state.auth.isAuth,
   }
 }
 
 function withRouter(Component: any) {
+
   function ComponentWithRouterProp(props: ProfilePropsType) {
     let location = useLocation();
     let navigate = useNavigate();
@@ -75,10 +81,13 @@ function withRouter(Component: any) {
           params
         }}
       />
-    );
+    )
   }
 
   return ComponentWithRouterProp;
 }
 
-export default connect(MapStateToProps, {getProfile})(withRouter(ProfileContainer));
+const WithUrlDataContainerComponent = withRouter(withAuthRedirect(ProfileContainer));
+
+export default connect(mapStateToProps,
+  {getProfile})(WithUrlDataContainerComponent);
